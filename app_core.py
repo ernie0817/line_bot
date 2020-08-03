@@ -38,9 +38,10 @@ def pixabay_isch(event):
     
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
         try:
-            url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q':'animal'})[2:]}/"
+            q_string = {'tbm': 'isch', 'q': event.message.text}
+            url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
             headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
-            
+
             req = urllib.request.Request(url, headers = headers)
             conn = urllib.request.urlopen(req)
             
