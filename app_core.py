@@ -47,7 +47,7 @@ def pixabay_isch(event):
             
             print('fetch page finish')
             
-            pattern = 'img srcset="\S*\s\w*,'
+            pattern = 'src="\S*"'
             img_list = []
             
             for match in re.finditer(pattern, str(conn.read())):
