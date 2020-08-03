@@ -37,13 +37,15 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                ImageSendMessage(
-                    original_content_url='https://i.imgur.com/PPJOlv8.jpg',
-                    preview_image_url='https://i.imgur.com/PPJOlv8.jpg'
-                )
-            )
+    line_bot_api.reply_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url='https://i.imgur.com/PPJOlv8.jpg',
+            preview_image_url='https://i.imgur.com/PPJOlv8.jpg'
+        )
+    )
+
+       
 
 if __name__ == "__main__":
     app.run()
