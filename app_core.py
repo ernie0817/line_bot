@@ -64,6 +64,10 @@ def pixabay_isch(event):
                     preview_image_url=random_img_url
                 )
             )
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='沒有圖!')
+            )
         # 如果找不到圖，就學你說話
         except:
             line_bot_api.reply_message(
