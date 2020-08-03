@@ -62,8 +62,8 @@ def pixabay_isch(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 ImageSendMessage(
-                    original_content_url=random_img_url,
-                    preview_image_url=random_img_url
+                    original_content_url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQggWZvPA4kbd-RWUkMDorM1mesi2kYJXgjfEykG009ckI2l1hy&usqp=CAU',
+                    preview_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQggWZvPA4kbd-RWUkMDorM1mesi2kYJXgjfEykG009ckI2l1hy&usqp=CAU'
                 )
             )
 
