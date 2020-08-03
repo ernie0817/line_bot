@@ -36,44 +36,15 @@ def callback():
 # 請 pixabay 幫我們找圖
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
-    
-    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-        try:
-            url = 'https://www.google.com.tw/search?q=' + event.message.text + ' &rlz=1C1CAFB_enTW617TW621&source=lnms&tbm=isch&sa=X&ved=0ahUKEwienc6V1oLcAhVN-WEKHdD_B3EQ_AUICigB&biw=1128&bih=863'
 
-            session = HTMLSession()
-            r = session.get(url)
-            r.html.render(sleep=3, scrolldown=1, wait=2)
-            img_arr = r.html.find("img")
-            img_no = 0
-            img_list = []
-            for i in img_arr:
-                tmp_content = ''
-                try:
-                    tmp_content = (i.attrs['src'])
-                    if tmp_content != '' and tmp_content.find('http') == -1 and tmp_content.find('/images') == -1:
-                        img_list.append(tmp_content)
-                except:
-                    pass
-            
-            random_img_url = img_list[random.randint(0, len(img_list)+1)]
-            
-            
-            line_bot_api.reply_message(
-                event.reply_token,
-                ImageSendMessage(
-                    original_content_url=random_img_url+'.jpg',
-                    preview_image_url=random_img_url+'.jpg'
-                )
-            )
-
-        # 如果找不到圖，就學你說話
-        except:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=event.message.text+'!')
-            )
-            pass
+    line_bot_api.reply_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url='https://i.imgur.com/JVXiiin.png',
+            preview_image_url='https://i.imgur.com/JVXiiin.png'
+        )
+    )
+       
 
 if __name__ == "__main__":
     app.run()
