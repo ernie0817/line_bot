@@ -10,6 +10,7 @@ import configparser
 import urllib
 import re
 import random
+from requests_html import HTMLSession
 
 app = Flask(__name__)
 
