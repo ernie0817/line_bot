@@ -5,12 +5,6 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
-import configparser
-
-import urllib
-import re
-import random
-from requests_html import HTMLSession
 
 app = Flask(__name__)
 
@@ -44,7 +38,10 @@ def pixabay_isch(event):
             preview_image_url='https://i.imgur.com/JVXiiin.png'
         )
     )
-
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text+'!')
+            )
        
 
 if __name__ == "__main__":
