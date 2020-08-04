@@ -36,7 +36,11 @@ def callback():
 # 請 pixabay 幫我們找圖
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
-
+    if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
+        try:
+            url = 'https://www.google.com.tw/search?q=' + event.message.text + ' &rlz=1C1CAFB_enTW617TW621&source=lnms&tbm=isch&sa=X&ved=0ahUKEwienc6V1oLcAhVN-WEKHdD_B3EQ_AUICigB&biw=1128&bih=863'
+        except:
+            pass
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
