@@ -40,8 +40,8 @@ def pixabay_isch(event):
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url='https://i.imgur.com/JVXiiin.png',
-            preview_image_url='https://i.imgur.com/JVXiiin.png'
+            original_content_url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSX6aenOVtA6YBcxyb5PO8IZq757T9KCUkh6w&usqp=CAU',
+            preview_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSX6aenOVtA6YBcxyb5PO8IZq757T9KCUkh6w&usqp=CAU'
         )
     )
        
