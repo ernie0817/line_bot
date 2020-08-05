@@ -42,6 +42,7 @@ def pixabay_isch(event):
             session = HTMLSession()
             r = session.get(url)
             # r.html.render(sleep=3, scrolldown=1, wait=2)
+            img_arr = r.html.find("img")
 
         except:
             line_bot_api.reply_message(
