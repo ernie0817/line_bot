@@ -43,6 +43,15 @@ def pixabay_isch(event):
             r = session.get(url)
             # r.html.render(sleep=3, scrolldown=1, wait=2)
             img_arr = r.html.find("img")
+            img_list = []
+            for i in img_arr:
+                tmp_content = ''
+                try:
+                    tmp_content = (i.attrs['src'])
+                    if tmp_content != '' and tmp_content.find('http') == -1 and tmp_content.find('/images') == -1:
+                        img_list.append(tmp_content)
+                except:
+                    pass
 
         except:
             line_bot_api.reply_message(
