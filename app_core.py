@@ -41,7 +41,7 @@ def pixabay_isch(event):
             url = 'https://www.google.com.tw/search?q=' + event.message.text + ' &rlz=1C1CAFB_enTW617TW621&source=lnms&tbm=isch&sa=X&ved=0ahUKEwienc6V1oLcAhVN-WEKHdD_B3EQ_AUICigB&biw=1128&bih=863'
             session = HTMLSession()
             r = session.get(url)
-            r.html.render(sleep=3, scrolldown=1, wait=2)
+            # r.html.render(sleep=3, scrolldown=1, wait=2)
 
         except:
             line_bot_api.reply_message(
