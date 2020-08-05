@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import os
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
@@ -17,6 +17,9 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 
+@app.route("/")
+def home():
+    return render_template("home.html")
 
 # 接收 LINE 的資訊
 @app.route("/callback", methods=['POST'])
