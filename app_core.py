@@ -15,8 +15,10 @@ from requests_html import HTMLSession
 app = Flask(__name__)
 
 # LINE 聊天機器人的基本資料
-line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
+
 
 # 接收 LINE 的資訊
 @app.route("/callback", methods=['POST'])
@@ -32,6 +34,7 @@ def callback():
         abort(400)
 
     return 'OK'
+
 
 # 請 pixabay 幫我們找圖
 @handler.add(MessageEvent, message=TextMessage)
@@ -56,7 +59,7 @@ def pixabay_isch(event):
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=str(random_img_url))
+                TextSendMessage(text=random_img_url)
             )
             pass
 
