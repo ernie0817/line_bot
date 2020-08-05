@@ -59,18 +59,18 @@ def pixabay_isch(event):
             # print('fetch img url finish')
             # print(random_img_url)
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=random_img_url)
-            )
-
             # line_bot_api.reply_message(
             #     event.reply_token,
-            #     ImageSendMessage(
-            #         original_content_url=random_img_url,
-            #         preview_image_url=random_img_url
-            #     )
+            #     TextSendMessage(text=random_img_url)
             # )
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                ImageSendMessage(
+                    original_content_url=random_img_url,
+                    preview_image_url=random_img_url
+                )
+            )
         # 如果找不到圖，就學你說話
         except:
             line_bot_api.reply_message(
