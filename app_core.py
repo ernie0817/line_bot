@@ -10,7 +10,6 @@ import configparser
 import urllib
 import re
 import random
-from requests_html import HTMLSession
 
 app = Flask(__name__)
 
@@ -42,13 +41,13 @@ def pixabay_isch(event):
         try:
             q_string = {'tbm': 'isch', 'q': event.message.text}
             url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
-            # headers = {
-            #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
-            #
-            # req = urllib.request.Request(url, headers=headers)
-            # conn = urllib.request.urlopen(req)
-            #
-            # print('fetch conn finish')
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
+
+            req = urllib.request.Request(url, headers=headers)
+            conn = urllib.request.urlopen(req)
+
+            print('fetch conn finish')
             #
             # pattern = 'img data-src="\S*"'
             # img_list = []
