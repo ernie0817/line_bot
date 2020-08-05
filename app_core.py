@@ -55,13 +55,13 @@ def pixabay_isch(event):
             for match in re.finditer(pattern, str(conn.read())):
                 img_list.append(match.group()[12:-3])
             #
-            # random_img_url = img_list[random.randint(0, len(img_list) + 1)]
+            random_img_url = img_list[random.randint(0, len(img_list) + 1)]
             # print('fetch img url finish')
             # print(random_img_url)
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=str(img_list))
+                TextSendMessage(text=random_img_url)
             )
 
             # line_bot_api.reply_message(
