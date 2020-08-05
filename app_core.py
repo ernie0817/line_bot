@@ -40,28 +40,29 @@ def callback():
 def pixabay_isch(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
         try:
-            url = f"https://pixabay.com/images/search/{urllib.parse.urlencode({'q': event.message.text})[2:]}/"
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
-
-            req = urllib.request.Request(url, headers=headers)
-            conn = urllib.request.urlopen(req)
-
-            print('fetch page finish')
-
-            pattern = 'img srcset="\S*\s\w*,'
-            img_list = []
-
-            for match in re.finditer(pattern, str(conn.read())):
-                img_list.append(match.group()[12:-3])
-
-            random_img_url = img_list[random.randint(0, len(img_list) + 1)]
-            print('fetch img url finish')
-            print(random_img_url)
+            q_string = {'tbm': 'isch', 'q': event.message.text}
+            url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
+            #
+            # req = urllib.request.Request(url, headers=headers)
+            # conn = urllib.request.urlopen(req)
+            #
+            # print('fetch conn finish')
+            #
+            # pattern = 'img data-src="\S*"'
+            # img_list = []
+            #
+            # for match in re.finditer(pattern, str(conn.read())):
+            #     img_list.append(match.group()[12:-3])
+            #
+            # random_img_url = img_list[random.randint(0, len(img_list) + 1)]
+            # print('fetch img url finish')
+            # print(random_img_url)
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=random_img_url)
+                TextSendMessage(text=url)
             )
 
             # line_bot_api.reply_message(
