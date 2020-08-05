@@ -61,7 +61,7 @@ def pixabay_isch(event):
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=url)
+                TextSendMessage(text=str(img_list))
             )
 
             # line_bot_api.reply_message(
