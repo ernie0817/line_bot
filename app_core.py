@@ -52,10 +52,11 @@ def pixabay_isch(event):
                         img_list.append(tmp_content)
                 except:
                     pass
+            random_img_url = img_list[random.randint(0, len(img_list) + 1)]
 
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=str(img_list))
+                TextSendMessage(text=str(random_img_url))
             )
             pass
 
