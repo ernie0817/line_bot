@@ -78,7 +78,7 @@ def pixabay_isch(event):
         except:
             line_bot_api.reply_message(
                 event.reply_token,
-                TextSendMessage(text=event.message.text)
+                TextSendMessage(text=str(event.source.user_id))
             )
             pass
 
