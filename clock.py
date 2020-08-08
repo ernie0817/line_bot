@@ -16,10 +16,10 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/20')
+@sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/25')
 def scheduled_job():
     print('========== APScheduler CRON =========')
-    print('This job runs every weekday */20 min.')
+    print('This job runs every weekday */25 min.')
     print(f'{datetime.datetime.now().ctime()}')
     print('========== APScheduler CRON =========')
 
@@ -29,7 +29,7 @@ def scheduled_job():
     for key, value in conn.getheaders():
         print(key, value)
 
-@sched.scheduled_job('cron', day_of_week='sat', hour=10, minute=20)
+@sched.scheduled_job('cron', day_of_week='thu', hour=21, minute=0)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
