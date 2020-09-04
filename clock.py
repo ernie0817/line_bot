@@ -11,10 +11,12 @@ import urllib
 import datetime
 
 # LINE 聊天機器人的基本資料
-line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 
 sched = BlockingScheduler()
+
 
 @sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/25')
 def scheduled_job():
@@ -29,7 +31,8 @@ def scheduled_job():
     for key, value in conn.getheaders():
         print(key, value)
 
-@sched.scheduled_job('cron', day_of_week='fri', hour=10, minute=45)
+
+@sched.scheduled_job('cron', day_of_week='thu', hour=19, minute=10)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
