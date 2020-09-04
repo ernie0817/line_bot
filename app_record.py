@@ -40,6 +40,11 @@ def callback():
 def reply_text_message(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
 
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=str(event.message.text))
+        )
+
         reply = False
 
         # 將資料存入表格中
