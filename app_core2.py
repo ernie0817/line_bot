@@ -11,7 +11,7 @@ import urllib
 import re
 import random
 
-from ordermeal import TTT
+import TTT
 
 app = Flask(__name__)
 
