@@ -11,7 +11,7 @@ import urllib
 import re
 import random
 
-import TTT
+import PhoebeTalks
 
 app = Flask(__name__)
 
