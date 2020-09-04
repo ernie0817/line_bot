@@ -11,7 +11,7 @@ import urllib
 import re
 import random
 
-from ordermeal.custom_models import utils, PhoebeTalks
+from custom_models import utils, PhoebeTalks
 
 app = Flask(__name__)
 
