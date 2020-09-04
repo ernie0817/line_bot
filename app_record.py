@@ -5,12 +5,6 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
-import configparser
-
-import urllib
-import re
-import random
-
 from ordermeal.custom_models import utils, PhoebeTalks
 
 app = Flask(__name__)
