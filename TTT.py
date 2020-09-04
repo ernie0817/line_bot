@@ -1,4 +1,4 @@
-﻿from __future__ import unicode_literals
+﻿# ﻿from __future__ import unicode_literals
 import os
 
 from linebot import LineBotApi, WebhookHandler
@@ -11,7 +11,39 @@ import configparser
 
 import random
 
+# 我們的函數
+from ordermeal.custom_models import utils, CallDatabase
+
+# LINE 聊天機器人的基本資料
+# config = configparser.ConfigParser()
+# config.read('config.ini')
+
+# line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
 line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+
+
+# 請 LINE 幫我們存入資料
+def insert_record(event):
+    if '草泥馬訓練紀錄' in event.message.text:
+
+        try:
+            record_list = utils.prepare_record(event.message.text)
+            reply = CallDatabase.line_insert_record(record_list)
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=reply)
+            )
+
+        except:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='失敗了')
+            )
+
+        return True
+    else:
+        return False
 
 
 # 請 pixabay 幫我們找圖
@@ -34,6 +66,13 @@ def img_search(event):
             img_list.append(match.group()[14:-3])
         #
         random_img_url = img_list[random.randint(0, len(img_list) + 1)]
+        # print('fetch img url finish')
+        # print(random_img_url)
+
+        # line_bot_api.reply_message(
+        #     event.reply_token,
+        #     TextSendMessage(text=random_img_url)
+        # )
 
         line_bot_api.reply_message(
             event.reply_token,
@@ -55,4 +94,4 @@ def pretty_echo(event):
         TextSendMessage(text=str(event.message.text))
     )
 
-    # return True
+    return True
