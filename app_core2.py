@@ -11,7 +11,7 @@ import urllib
 import re
 import random
 
-from custom_models import utils, PhoebeTalks
+from ordermeal import TTT
 
 app = Flask(__name__)
 
@@ -38,7 +38,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
     
-    PhoebeTalks.pretty_echo(event)
+    TTT.pretty_echo(event)
 
 if __name__ == "__main__":
     app.run()
