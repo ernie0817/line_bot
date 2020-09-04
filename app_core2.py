@@ -38,7 +38,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
     
-    TTT.pretty_echo(event)
+    TTT.img_search(event)
 
 if __name__ == "__main__":
     app.run()
