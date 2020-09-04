@@ -12,7 +12,7 @@ import configparser
 import random
 
 # 我們的函數
-# from ordermeal.custom_models import utils, CallDatabase
+import utils, CallDatabase
 
 # LINE 聊天機器人的基本資料
 # config = configparser.ConfigParser()
@@ -94,4 +94,4 @@ def pretty_echo(event):
         TextSendMessage(text=str(event.message.text))
     )
 
-    # return True
+    return True
