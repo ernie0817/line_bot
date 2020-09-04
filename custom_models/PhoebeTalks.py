@@ -94,4 +94,4 @@ def pretty_echo(event):
         TextSendMessage(text=str(event.message.text))
     )
 
-    return True
+    # return True
