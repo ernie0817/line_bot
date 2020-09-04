@@ -38,7 +38,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def pixabay_isch(event):
 
-    PhoebeTalks.img_search(event)
+    PhoebeTalks.insert_record(event)
 
 if __name__ == "__main__":
     app.run()

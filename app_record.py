@@ -5,7 +5,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
-from ordermeal.custom_models import utils, PhoebeTalks
+from custom_models import PhoebeTalks, utils
 
 app = Flask(__name__)
 
@@ -33,11 +33,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def reply_text_message(event):
     if event.source.user_id != "Udeadbeefdeadbeefdeadbeefdeadbeef":
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=str(event.message.text))
-        )
 
         reply = False
 
