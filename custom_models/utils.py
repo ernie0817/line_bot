@@ -146,3 +146,12 @@ def prepare_img_search_flex(text, translate, random_img_url):
                 }
                 }
     return contents
+
+
+# Day24: 列出每個欄位中的所有選項
+def get_unique(table):
+    unique_alpaca_name = {i[1] for i in table}
+    unique_training = {i[2] for i in table}
+    unique_date = {i[4] for i in table}
+
+    return sorted(unique_alpaca_name), sorted(unique_training), sorted(unique_date)
