@@ -1,6 +1,6 @@
 ﻿from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import FlexSendMessage
+from linebot.models import FlexSendMessage, TextSendMessage
 
 import configparser
 import googletrans
@@ -41,11 +41,16 @@ def img_search_flex(event):
 
             line_bot_api.reply_message(
                 event.reply_token,
-                FlexSendMessage(
-                    alt_text=f'flex {translate}',
-                    contents=contents
-                )
+                TextSendMessage(text=str(translate))
             )
+
+            # line_bot_api.reply_message(
+            #     event.reply_token,
+            #     FlexSendMessage(
+            #         alt_text=f'flex {translate}',
+            #         contents=contents
+            #     )
+            # )
 
             return True
 
