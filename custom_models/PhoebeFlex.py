@@ -3,7 +3,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import FlexSendMessage
 
 import configparser
-
+import googletrans
 import re
 
 # 引入我們的套件
@@ -31,8 +31,10 @@ def img_search_flex(event):
     if re.match("flex", event.message.text.lower()):
 
         try:
-
-            translate = utils.get_translate(event.message.text[5:])
+            translator = googletrans.Translator()
+            results = translator.translate(event.message.text[5:])
+            # translate = utils.get_translate(event.message.text[5:])
+            translate = results.text
             random_img_url = utils.get_img_url(target=translate)
 
             contents = utils.prepare_img_search_flex(event.message.text[5:], translate, random_img_url)
