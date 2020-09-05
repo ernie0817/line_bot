@@ -87,3 +87,62 @@ def prepare_record(text):
         record_list.append(record)
 
     return record_list
+
+
+# 上 google 找翻譯
+def get_translate(text):
+    translate = f'{text} 英文'
+
+    url = f"https://www.google.com/search?{urllib.parse.urlencode(dict([['oq', translate], ['q', translate]]))}/"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
+
+    req = urllib.request.Request(url, headers=headers)
+    conn = urllib.request.urlopen(req)
+
+    data = conn.read()
+
+    pattern = '<span tabindex="0">\S*</span>'
+    match = re.search(pattern, str(data))
+
+    return match.group()[19:-7]
+
+
+# 根據輸入的參數製造 FlexMessage
+def prepare_img_search_flex(text, translate, random_img_url):
+    contents = {"type": "bubble",
+                "header": {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                        {"type": "text", "text": text, "size": "xl", "weight": "bold"},
+                        {"type": "text", "text": translate, "size": "lg", "color": "#888888", "align": "end",
+                         "gravity": "bottom"}
+                    ]
+                },
+                "hero": {
+                    "type": "image",
+                    "url": random_img_url,
+                    "size": "full",
+                    "aspect_ratio": "20:13",
+                    "aspect_mode": "cover"
+                },
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "md",
+                    "contents": [
+                        {"type": "text", "text": "圖片的出處在這裡", "size": "md", "weight": "bold"}
+                    ]
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                        {"type": "spacer", "size": "md"},
+                        {"type": "button", "style": "primary", "color": "#1DB446",
+                         "action": {"type": "uri", "label": "GO", "uri": random_img_url}}
+                    ]
+                }
+                }
+    return contents

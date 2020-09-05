@@ -5,7 +5,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
-from custom_models import PhoebeTalks, utils
+from custom_models import PhoebeTalks, utils, PhoebeFlex
 
 app = Flask(__name__)
 
@@ -42,7 +42,7 @@ def reply_text_message(event):
 
         # 發送 FlexMessage
         if not reply:
-            reply = PhoebeTalks.img_search(event)
+            reply = PhoebeFlex.img_search_flex(event)
 
         # 幫忙上網找圖
         if not reply:

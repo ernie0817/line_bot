@@ -9,10 +9,7 @@ import re
 # 引入我們的套件
 from custom_models import utils
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
+line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 
 # LINE 提供的 FlexMessage 範例
 sample = {
@@ -36,7 +33,7 @@ def img_search_flex(event):
         try:
 
             translate = utils.get_translate(event.message.text[5:])
-            random_img_url = utils.get_img_url(img_source='pixabay', target=translate)
+            random_img_url = utils.get_img_url(target=translate)
 
             contents = utils.prepare_img_search_flex(event.message.text[5:], translate, random_img_url)
 
