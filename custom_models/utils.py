@@ -5,38 +5,59 @@ import datetime
 
 
 # 請 pixabay 幫我們找圖
-def get_img_url(img_source, target):
-    img_source_dict = {
-        'google': [f"https://www.google.com/search?{urllib.parse.urlencode(dict([['tbm', 'isch'], ['q', target]]))}/",
-                   'img data-src="\S*"',
-                   14,
-                   -1],
-        'pixabay': [f"https://pixabay.com/images/search/{urllib.parse.urlencode(dict([['q', target]]))[2:]}/",
-                    'img srcset="\S*\s\w*,',
-                    12,
-                    -3],
-        'unsplash': [f"https://unsplash.com/s/photos/{urllib.parse.urlencode(dict([['q', target]]))[2:]}/",
-                     'srcSet="\S* ',
-                     8,
-                     -1]}
+# def get_img_url(img_source, target):
+#     img_source_dict = {
+#         'google': [f"https://www.google.com/search?{urllib.parse.urlencode(dict([['tbm', 'isch'], ['q', target]]))}/",
+#                    'img data-src="\S*"',
+#                    14,
+#                    -1],
+#         'pixabay': [f"https://pixabay.com/images/search/{urllib.parse.urlencode(dict([['q', target]]))[2:]}/",
+#                     'img srcset="\S*\s\w*,',
+#                     12,
+#                     -3],
+#         'unsplash': [f"https://unsplash.com/s/photos/{urllib.parse.urlencode(dict([['q', target]]))[2:]}/",
+#                      'srcSet="\S* ',
+#                      8,
+#                      -1]}
+#
+#     url = img_source_dict[img_source][0]
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
+#
+#     req = urllib.request.Request(url, headers=headers)
+#     conn = urllib.request.urlopen(req)
+#
+#     print('fetch page finish')
+#
+#     img_list = []
+#
+#     for match in re.finditer(img_source_dict[img_source][1], str(conn.read())):
+#         img_list.append(match.group()[img_source_dict[img_source][2]:img_source_dict[img_source][3]])
+#
+#     random_img_url = random.choice(img_list)
+#     print('fetch img url finish')
+#     print(random_img_url)
+#
+#     return random_img_url
 
-    url = img_source_dict[img_source][0]
+def get_img_url(target):
+    q_string = {'tbm': 'isch', 'q': target}
+    url = f"https://www.google.com/search?{urllib.parse.urlencode(q_string)}/"
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'}
 
     req = urllib.request.Request(url, headers=headers)
     conn = urllib.request.urlopen(req)
 
-    print('fetch page finish')
-
+    print('fetch conn finish')
+    #
+    pattern = 'img data-src="\S*"'
     img_list = []
 
-    for match in re.finditer(img_source_dict[img_source][1], str(conn.read())):
-        img_list.append(match.group()[img_source_dict[img_source][2]:img_source_dict[img_source][3]])
-
-    random_img_url = random.choice(img_list)
-    print('fetch img url finish')
-    print(random_img_url)
+    for match in re.finditer(pattern, str(conn.read())):
+        img_list.append(match.group()[14:-3])
+    #
+    random_img_url = img_list[random.randint(0, len(img_list) + 1)]
 
     return random_img_url
 

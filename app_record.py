@@ -40,7 +40,7 @@ def reply_text_message(event):
         if not reply:
             reply = PhoebeTalks.insert_record(event)
 
-        # 幫忙上網找圖
+        # 發送 FlexMessage
         if not reply:
             reply = PhoebeTalks.img_search(event)
 
