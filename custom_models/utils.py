@@ -149,9 +149,19 @@ def prepare_img_search_flex(text, translate, random_img_url):
 
 
 # Day24: 列出每個欄位中的所有選項
+# Day29: 新增 isocalendar()
 def get_unique(table):
-    unique_alpaca_name = {i[1] for i in table}
-    unique_training = {i[2] for i in table}
-    unique_date = {i[4] for i in table}
+    unique_alpaca_name = sorted({i[1] for i in table})
+    unique_training = sorted({i[2] for i in table})
+    unique_date = sorted({i[4] for i in table})
+    unique_isocalendar = sorted({datetime.datetime.strptime(i[4], '%Y-%m-%d').isocalendar() for i in table})
 
-    return sorted(unique_alpaca_name), sorted(unique_training), sorted(unique_date)
+    return unique_alpaca_name, unique_training, unique_date, unique_isocalendar
+
+
+# Day27: 準備好可以轉換成適合 JavaScript 的資料
+def total_seconds(table):
+    new_table = []
+    for i in table:
+        new_table.append((i[0], i[1], i[2], int(i[3].total_seconds()), str(i[4])))
+    return new_table

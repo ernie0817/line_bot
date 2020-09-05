@@ -4,7 +4,17 @@
 
 {% block main %}
 
-  <div class="container welcome">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class = 'alert alert-success'>
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="container" style="margin: 4em auto">
       <div class="row">
       
       <h1><i class="fas fa-baseball-ball"></i> 賴田捕手</h1>
