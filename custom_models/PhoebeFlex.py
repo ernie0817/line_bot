@@ -39,18 +39,18 @@ def img_search_flex(event):
 
             contents = utils.prepare_img_search_flex(event.message.text[5:], translate, random_img_url)
 
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=str(translate))
-            )
-
             # line_bot_api.reply_message(
             #     event.reply_token,
-            #     FlexSendMessage(
-            #         alt_text=f'flex {translate}',
-            #         contents=contents
-            #     )
+            #     TextSendMessage(text=str(translate))
             # )
+
+            line_bot_api.reply_message(
+                event.reply_token,
+                FlexSendMessage(
+                    alt_text=f'flex {translate}',
+                    contents=contents
+                )
+            )
 
             return True
 
