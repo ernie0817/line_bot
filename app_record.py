@@ -181,6 +181,14 @@ def reply_text_message(event):
 
         reply = False
 
+        # 召會生活人數網站
+        if not reply:
+            reply = PhoebeTalks.churchlife(event)
+
+        # 湧流網站
+        if not reply:
+            reply = PhoebeTalks.flow(event)
+
         # 將資料存入表格中
         if not reply:
             reply = PhoebeTalks.insert_record(event)
