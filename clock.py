@@ -17,7 +17,7 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('interval', day_of_week='mon-fri', minute='*/25')
+@sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/25')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job runs every weekday */25 min.')
@@ -31,14 +31,14 @@ def scheduled_job():
         print(key, value)
 
 
-@sched.scheduled_job('cron', day_of_week='fri', hour=17, minute=15)
+@sched.scheduled_job('cron', day_of_week='mon-fri', hour=17, minute=22)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
     print('========== APScheduler CRON =========')
 
-    line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
-    # line_bot_api.broadcast(TextSendMessage(text="記得訂便當喔!"))
+    # line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
+    line_bot_api.broadcast(TextSendMessage(text="記得訂便當喔!"))
 
 
 sched.start()
