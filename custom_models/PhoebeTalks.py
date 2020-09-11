@@ -19,7 +19,8 @@ from custom_models import utils, CallDatabase
 # config.read('config.ini')
 
 # line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 
 
 # 請 LINE 幫我們存入資料
@@ -71,3 +72,29 @@ def pretty_echo(event):
     )
 
     return True
+
+
+def churchlife(event):
+    if '召會生活人數統計' in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='https://www.chlife-stat.org/login.php')
+        )
+
+        return True
+
+    else:
+        return False
+
+
+def flow(event):
+    if '湧流' in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='https://flowingstream.org/')
+        )
+
+        return True
+
+    else:
+        return False
