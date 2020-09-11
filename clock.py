@@ -31,7 +31,7 @@ def scheduled_job():
         print(key, value)
 
 
-@sched.scheduled_job('cron', day_of_week='fri', hour=17, minute=0)
+@sched.scheduled_job('cron', day_of_week='fri', hour=17, minute=10)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
