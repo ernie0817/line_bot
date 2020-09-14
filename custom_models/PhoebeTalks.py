@@ -106,7 +106,7 @@ def order_meal(event, userId):
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=profile.text)
+            TextSendMessage(text=profile.text['displayName'])
         )
 
         return True
