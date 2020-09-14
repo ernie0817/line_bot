@@ -17,7 +17,7 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('cron', day_of_week='mon-fri', minute='*/25')
+@sched.scheduled_job('cron', day_of_week=0-4, minute='*/25')
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job runs every weekday */25 min.')

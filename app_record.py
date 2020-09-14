@@ -183,6 +183,10 @@ def reply_text_message(event):
 
         # 召會生活人數網站
         if not reply:
+            reply = PhoebeTalks.order_meal(event, event.source.user_id)
+
+        # 召會生活人數網站
+        if not reply:
             reply = PhoebeTalks.churchlife(event)
 
         # 湧流網站

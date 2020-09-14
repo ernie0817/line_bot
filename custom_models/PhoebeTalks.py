@@ -6,7 +6,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, PostbackEvent, TextMessage, TextSendMessage, ImageSendMessage, FlexSendMessage
 import urllib
 import re
-
+import requests
 import configparser
 
 import random
@@ -19,8 +19,7 @@ from custom_models import utils, CallDatabase
 # config.read('config.ini')
 
 # line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-line_bot_api = LineBotApi(
-    'mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 
 
 # 請 LINE 幫我們存入資料
@@ -92,6 +91,22 @@ def flow(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='https://flowingstream.org/')
+        )
+
+        return True
+
+    else:
+        return False
+
+
+def order_meal(event, userId):
+    profile_data = {'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
+    profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
+    if '訂便當' in event.message.text:
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=profile.text)
         )
 
         return True
