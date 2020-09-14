@@ -111,7 +111,7 @@ def order_meal(event, userId):
     today = datetime.datetime.now().date()
     this_sat = today + datetime.timedelta(days=5 - datetime.datetime.now().weekday())
 
-    if '訂便當' or '週六' or '追求' in event.message.text:
+    if '週六追求訂便當' in event.message.text:
 
         line_bot_api.reply_message(
             event.reply_token,
