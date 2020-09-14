@@ -122,6 +122,7 @@ def order_meal(event, userId):
                                     MessageTemplateAction(label='因有事無法參加', text=str(user_json['displayName']) + str(this_sat) + '因有事無法參加 已儲存...')]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
+    elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
 
         return True
 
