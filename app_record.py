@@ -181,10 +181,6 @@ def reply_text_message(event):
 
         reply = False
 
-        # 週六追求
-        if not reply:
-            reply = PhoebeTalks.order_meal(event, event.source.user_id)
-
         # 召會生活人數網站
         if not reply:
             reply = PhoebeTalks.churchlife(event)
@@ -209,6 +205,9 @@ def reply_text_message(event):
         if not reply:
             reply = PhoebeTalks.pretty_echo(event)
 
+        # 週六追求
+        if not reply:
+            reply = PhoebeTalks.order_meal(event, event.source.user_id)
 
 if __name__ == "__main__":
     app.run()
