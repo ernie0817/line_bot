@@ -3,11 +3,13 @@ import os
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, PostbackEvent, TextMessage, TextSendMessage, ImageSendMessage, FlexSendMessage
+from linebot.models import MessageEvent, PostbackEvent, TextMessage, TextSendMessage, ImageSendMessage, FlexSendMessage, \
+    TemplateSendMessage, ButtonsTemplate, MessageTemplateAction
 import urllib
 import re
 import requests
 import json
+import datetime
 import configparser
 
 import random
@@ -20,7 +22,8 @@ from custom_models import utils, CallDatabase
 # config.read('config.ini')
 
 # line_bot_api = LineBotApi(config.get('line-bot', 'channel_access_token'))
-line_bot_api = LineBotApi('mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(
+    'mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU=')
 
 
 # 請 LINE 幫我們存入資料
@@ -101,15 +104,23 @@ def flow(event):
 
 
 def order_meal(event, userId):
-    profile_data = {'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
+    profile_data = {
+        'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
     profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
     user_json = json.loads(profile.text)
+    today = datetime.datetime.now().date()
+    this_sat = today + datetime.timedelta(days=5 - datetime.datetime.now().weekday())
 
     if '訂便當' or '週六' or '追求' in event.message.text:
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(user_json['displayName']))
+            TemplateSendMessage(alt_text='Buttons template',
+                                template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
+                                    MessageTemplateAction(label='會參加會留下用餐', text='會參加會留下用餐'),
+                                    MessageTemplateAction(label='會參加不留下用餐', text='會參加不留下用餐'),
+                                    MessageTemplateAction(label='因有事無法參加', text='因有事無法參加')]))
+            # TextSendMessage(text=str(user_json['displayName']))
         )
 
         return True
