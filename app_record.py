@@ -189,6 +189,10 @@ def reply_text_message(event):
         if not reply:
             reply = PhoebeTalks.flow(event)
 
+        # 週六追求
+        if not reply:
+            reply = PhoebeTalks.order_meal(event, event.source.user_id)
+
         # 將資料存入表格中
         if not reply:
             reply = PhoebeTalks.insert_record(event)
@@ -205,9 +209,6 @@ def reply_text_message(event):
         if not reply:
             reply = PhoebeTalks.pretty_echo(event)
 
-        # 週六追求
-        if not reply:
-            reply = PhoebeTalks.order_meal(event, event.source.user_id)
 
 if __name__ == "__main__":
     app.run()
