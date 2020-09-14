@@ -117,7 +117,7 @@ def order_meal(event, userId):
             event.reply_token,
             TemplateSendMessage(alt_text='Buttons template',
                                 template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
-                                    MessageTemplateAction(label='會參加會留下用餐', text='會參加會留下用餐'),
+                                    MessageTemplateAction(label='會參加且會留下用餐', text=str(user_json['displayName']) + str(this_sat) + '會參加且會留下用餐'),
                                     MessageTemplateAction(label='會參加不留下用餐', text='會參加不留下用餐'),
                                     MessageTemplateAction(label='因有事無法參加', text='因有事無法參加')]))
             # TextSendMessage(text=str(user_json['displayName']))

@@ -181,7 +181,7 @@ def reply_text_message(event):
 
         reply = False
 
-        # 召會生活人數網站
+        # 週六追求
         if not reply:
             reply = PhoebeTalks.order_meal(event, event.source.user_id)
 
