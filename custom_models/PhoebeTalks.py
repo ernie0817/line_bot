@@ -7,6 +7,7 @@ from linebot.models import MessageEvent, PostbackEvent, TextMessage, TextSendMes
 import urllib
 import re
 import requests
+import json
 import configparser
 
 import random
@@ -102,12 +103,13 @@ def flow(event):
 def order_meal(event, userId):
     profile_data = {'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
     profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
-    # user_json = profile.text
+    user_json = json.load(profile.text)
+
     if '訂便當' in event.message.text:
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=profile.text)
+            TextSendMessage(text=user_json['displayName'])
         )
 
         return True
