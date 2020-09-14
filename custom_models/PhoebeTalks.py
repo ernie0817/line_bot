@@ -105,7 +105,7 @@ def order_meal(event, userId):
     profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
     user_json = json.loads(profile.text)
 
-    if '訂便當' in event.message.text:
+    if '訂便當' or '週六' or '追求' in event.message.text:
 
         line_bot_api.reply_message(
             event.reply_token,
