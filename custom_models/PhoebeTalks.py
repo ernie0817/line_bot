@@ -117,12 +117,24 @@ def order_meal(event, userId):
             event.reply_token,
             TemplateSendMessage(alt_text='Buttons template',
                                 template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
-                                    MessageTemplateAction(label='會參加且會留下用餐', text=str(user_json['displayName']) + str(this_sat) + '會參加且會留下用餐 已儲存...'),
-                                    MessageTemplateAction(label='會參加不留下用餐', text=str(user_json['displayName']) + str(this_sat) + '會參加不留下用餐 已儲存...'),
-                                    MessageTemplateAction(label='因有事無法參加', text=str(user_json['displayName']) + str(this_sat) + '因有事無法參加 已儲存...')]))
+                                    MessageTemplateAction(label='會參加且會留下用餐',
+                                                          text=str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 會參加且會留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'A/' + str(this_sat)),
+                                    MessageTemplateAction(label='會參加不留下用餐',
+                                                          text=str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 會參加不留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'B/' + str(this_sat)),
+                                    MessageTemplateAction(label='因有事無法參加',
+                                                          text=str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 因有事無法參加 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'C/' + str(this_sat))]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
     elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
+        text_list = event.postback.data.split('/')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=text_list)
+        )
+        # record_list = utils.prepare_record(event.postback.data)
 
         return True
 
