@@ -117,11 +117,11 @@ def order_meal(event, userId):
             TemplateSendMessage(alt_text='Buttons template',
                                 template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
                                     MessageTemplateAction(label='會參加且會留下用餐',
-                                                          text=' 週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加且會留下用餐'),
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加且會留下用餐'),
                                     MessageTemplateAction(label='會參加但不留下用餐',
-                                                          text=' 週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加但不留下用餐'),
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加但不留下用餐'),
                                     MessageTemplateAction(label='因有事無法參加',
-                                                          text=' 週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 因有事無法參加')]))
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 因有事無法參加')]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
     # elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
@@ -141,11 +141,18 @@ def order_meal(event, userId):
 def participate(event, userId):
     if '週六追求簽到' in event.message.text:
         text_list = event.message.text.split(' ')
-        record_list = [userId, text_list[1], text_list[2], text_list[3]]
+        if text_list[3] == '會參加且會留下用餐':
+            pa = 'A'
+        if text_list[3] == '會參加但不留下用餐':
+            pa = 'B'
+        if text_list[3] == '因有事無法參加':
+            pa = 'C'
+        record_list = [userId, text_list[1], text_list[2], pa]
+        reply = CallDatabase.line_insert_record(record_list)
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(record_list) + ' 資料匯入成功!')
+            TextSendMessage(text=str(record_list) + reply)
         )
 
         return True

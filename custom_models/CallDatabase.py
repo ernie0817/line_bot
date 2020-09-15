@@ -16,7 +16,7 @@ def line_insert_record(record_list):
     cursor.executemany(postgres_insert_query, record_list)
     conn.commit()
 
-    message = f"恭喜您！ 資料匯入成功!"
+    message = '資料匯入成功!'
     # print(message)
 
     cursor.close()
