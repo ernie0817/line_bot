@@ -110,29 +110,29 @@ def order_meal(event, userId):
     user_json = json.loads(profile.text)
     today = datetime.datetime.now().date()
     this_sat = today + datetime.timedelta(days=5 - datetime.datetime.now().weekday())
+    if isinstance(event, MessageEvent):  # 如果有訊息事件
+        if '週六追求訂便當' in event.message.text:
 
-    if '週六追求訂便當' in event.message.text:
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TemplateSendMessage(alt_text='Buttons template',
-                                template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
-                                    MessageTemplateAction(label='會參加且會留下用餐',
-                                                          text=str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 會參加且會留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'A/' + str(this_sat)),
-                                    MessageTemplateAction(label='會參加不留下用餐',
-                                                          text=str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 會參加不留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'B/' + str(this_sat)),
-                                    MessageTemplateAction(label='因有事無法參加',
-                                                          text=str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 因有事無法參加 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'C/' + str(this_sat))]))
-            # TextSendMessage(text=str(user_json['displayName']))
-        )
+            line_bot_api.reply_message(
+                event.reply_token,
+                TemplateSendMessage(alt_text='Buttons template',
+                                    template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
+                                        MessageTemplateAction(label='會參加且會留下用餐',
+                                                              text=str(user_json['displayName']) + ' ' + str(
+                                                                  this_sat) + ' 會參加且會留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'A/' + str(this_sat)),
+                                        MessageTemplateAction(label='會參加不留下用餐',
+                                                              text=str(user_json['displayName']) + ' ' + str(
+                                                                  this_sat) + ' 會參加不留下用餐 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'B/' + str(this_sat)),
+                                        MessageTemplateAction(label='因有事無法參加',
+                                                              text=str(user_json['displayName']) + ' ' + str(
+                                                                  this_sat) + ' 因有事無法參加 已儲存...', data=userId + '/' + str(user_json['displayName']) + '/' + 'C/' + str(this_sat))]))
+                # TextSendMessage(text=str(user_json['displayName']))
+            )
     elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
         text_list = event.postback.data.split('/')
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=text_list)
+            TextSendMessage(text=str(text_list))
         )
         # record_list = utils.prepare_record(event.postback.data)
 
