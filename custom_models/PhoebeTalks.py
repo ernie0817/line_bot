@@ -139,6 +139,7 @@ def order_meal(event, userId):
 
 
 def participate(event, userId):
+    global pa
     if '週六追求簽到' in event.message.text:
         text_list = event.message.text.split(' ')
         if text_list[3] == '會參加且會留下用餐':
