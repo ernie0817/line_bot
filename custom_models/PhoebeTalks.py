@@ -132,7 +132,7 @@ def order_meal(event, userId):
         text_list = event.postback.data.split('/')
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(text_list))
+            TextSendMessage(text=str(text_list) + '已寫入資料庫')
         )
         # record_list = utils.prepare_record(event.postback.data)
 
