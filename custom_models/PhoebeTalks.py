@@ -152,7 +152,7 @@ def participate(event, userId):
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(record_list))
+            TextSendMessage(text=reply)
         )
 
         return True

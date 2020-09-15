@@ -63,39 +63,37 @@ def home():
 
 
 # Day25: Flask-Login
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'GET':
-        return render_template("login.html")
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if request.method == 'GET':
+#         return render_template("login.html")
+#
+#     user_id = request.form['user_id']
+#     if (user_id in users) and (request.form['password'] == users[user_id]['password']):
+#         user = User()
+#         user.id = user_id
+#         login_user(user)
+#         flash(f'{user_id}！歡迎加入草泥馬訓練家的行列！')
+#         return redirect(url_for('from_start'))
+#
+#     flash('登入失敗了...')
+#     return render_template('login.html')
+#
+#
+# @app.route('/logout')
+# def logout():
+#     user_id = current_user.get_id()
+#     logout_user()
+#     flash(f'{user_id}！歡迎下次再來！')
+#     return render_template('login.html')
 
-    user_id = request.form['user_id']
-    if (user_id in users) and (request.form['password'] == users[user_id]['password']):
-        user = User()
-        user.id = user_id
-        login_user(user)
-        flash(f'{user_id}！歡迎加入草泥馬訓練家的行列！')
-        return redirect(url_for('from_start'))
 
-    flash('登入失敗了...')
-    return render_template('login.html')
-
-
-@app.route('/logout')
-def logout():
-    user_id = current_user.get_id()
-    logout_user()
-    flash(f'{user_id}！歡迎下次再來！')
-    return render_template('login.html')
-
-
-@app.route("/from_start")
-@login_required
-def from_start():
-    return render_template("from_start.html")
+# @app.route("/from_start")
+# def from_start():
+#     return render_template("from_start.html")
 
 
 @app.route("/show_records")
-@login_required
 def show_records():
     python_records = CallDatabase.web_select_overall()
     return render_template("show_records.html", html_records=python_records)
@@ -103,7 +101,6 @@ def show_records():
 
 # Day24: 選擇訓練紀錄
 @app.route("/select_records", methods=['GET', 'POST'])
-@login_required
 def select_records():
     if request.method == 'POST':
         print(request.form)
@@ -115,7 +112,6 @@ def select_records():
 
 # Day24: 舒適地選擇訓練紀錄
 @app.route("/select_records_comfortable", methods=['GET', 'POST'])
-@login_required
 def select_records_comfortable():
     if request.method == 'POST':
         print(request.form)
@@ -130,7 +126,6 @@ def select_records_comfortable():
 
 # Day27: 甜甜圈！
 @app.route("/donut_chart")
-@login_required
 def donut_chart():
     table = CallDatabase.web_select_overall()
     table = utils.total_seconds(table)
@@ -140,7 +135,6 @@ def donut_chart():
 
 # Day28: 曲線圖！
 @app.route("/spline_chart")
-@login_required
 def spline_chart():
     table = CallDatabase.web_select_overall()
     table = utils.total_seconds(table)
@@ -149,13 +143,13 @@ def spline_chart():
 
 
 # Day29: 史丹佛！
-@app.route("/stanford_chart")
-@login_required
-def stanford_chart():
-    table = CallDatabase.web_select_overall()
-    table = utils.total_seconds(table)
-    uniques = utils.get_unique(table)
-    return render_template("stanford_chart.html", table=table, uniques=uniques)
+# @app.route("/stanford_chart")
+# @login_required
+# def stanford_chart():
+#     table = CallDatabase.web_select_overall()
+#     table = utils.total_seconds(table)
+#     uniques = utils.get_unique(table)
+#     return render_template("stanford_chart.html", table=table, uniques=uniques)
 
 
 # 接收 LINE 的資訊
