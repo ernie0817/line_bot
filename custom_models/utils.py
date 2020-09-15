@@ -163,5 +163,5 @@ def get_unique(table):
 def total_seconds(table):
     new_table = []
     for i in table:
-        new_table.append((i[0], i[1], i[2], int(i[3].total_seconds()), str(i[4])))
+        new_table.append((i[0], i[1], i[2], i[3], str(i[4])))
     return new_table
