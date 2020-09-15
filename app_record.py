@@ -59,7 +59,9 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    python_records = CallDatabase.web_select_overall()
+    return render_template("show_records.html", html_records=python_records)
+    # return render_template("home.html")
 
 
 # Day25: Flask-Login
@@ -93,10 +95,10 @@ def home():
 #     return render_template("from_start.html")
 
 
-@app.route("/show_records")
-def show_records():
-    python_records = CallDatabase.web_select_overall()
-    return render_template("show_records.html", html_records=python_records)
+# @app.route("/show_records")
+# def show_records():
+#     python_records = CallDatabase.web_select_overall()
+#     return render_template("show_records.html", html_records=python_records)
 
 
 # Day24: 選擇訓練紀錄
