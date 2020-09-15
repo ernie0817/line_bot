@@ -5,22 +5,22 @@ import os
 def line_insert_record(record_list):
     DATABASE_URL = os.environ['DATABASE_URL']
 
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    cursor = conn.cursor()
-
-    # table_columns = '(alpaca_name, training, duration, date)'
-    # postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (%s,%s,%s,%s)"""
-    table_columns = '(user_id, user_name, participate, date)'
-    postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s);"""
-
-    cursor.executemany(postgres_insert_query, record_list)
-    conn.commit()
+    # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    # cursor = conn.cursor()
+    #
+    # # table_columns = '(alpaca_name, training, duration, date)'
+    # # postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (%s,%s,%s,%s)"""
+    # table_columns = '(user_id, user_name, participate, date)'
+    # postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s);"""
+    #
+    # cursor.executemany(postgres_insert_query, record_list)
+    # conn.commit()
 
     message = '資料匯入成功!'
     # print(message)
 
-    cursor.close()
-    conn.close()
+    # cursor.close()
+    # conn.close()
 
     return message
 
