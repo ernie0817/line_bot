@@ -100,14 +100,14 @@ def show_records():
 
 
 # Day24: 選擇訓練紀錄
-@app.route("/select_records", methods=['GET', 'POST'])
-def select_records():
-    if request.method == 'POST':
-        print(request.form)
-        python_records = CallDatabase.web_select_specific(request.form)
-        return render_template("show_records.html", html_records=python_records)
-    else:
-        return render_template("select_records.html")
+# @app.route("/select_records", methods=['GET', 'POST'])
+# def select_records():
+#     if request.method == 'POST':
+#         print(request.form)
+#         python_records = CallDatabase.web_select_specific(request.form)
+#         return render_template("show_records.html", html_records=python_records)
+#     else:
+#         return render_template("select_records.html")
 
 
 # Day24: 舒適地選擇訓練紀錄
