@@ -193,6 +193,10 @@ def reply_text_message(event):
         if not reply:
             reply = PhoebeTalks.order_meal(event, event.source.user_id)
 
+        # 週六追求簽到資料庫
+        if not reply:
+            reply = PhoebeTalks.participate(event, event.source.user_id)
+
         # 將資料存入表格中
         if not reply:
             reply = PhoebeTalks.insert_record(event)

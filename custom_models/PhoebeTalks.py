@@ -137,3 +137,16 @@ def order_meal(event, userId):
 
     else:
         return False
+
+
+def participate(event, userId):
+    if '週六追求簽到' in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text + '資料匯入成功!')
+        )
+
+        return True
+
+    else:
+        return False
