@@ -13,14 +13,14 @@ def line_insert_record(record_list):
     table_columns = '(user_id, user_name, participate, date)'
     postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s);"""
     #
-    # cursor.executemany(postgres_insert_query, record_list)
-    # conn.commit()
+    cursor.executemany(postgres_insert_query, record_list)
+    conn.commit()
 
     message = '資料匯入成功!'
     # print(message)
 
-    # cursor.close()
-    # conn.close()
+    cursor.close()
+    conn.close()
 
     return message
 
