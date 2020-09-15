@@ -148,11 +148,11 @@ def participate(event, userId):
         # if text_list[3] == '因有事無法參加':
         #     pa = 'C'
         record_list = [userId, text_list[1], text_list[2], text_list[3]]
-        reply = CallDatabase.line_insert_record(record_list)
+        # reply = CallDatabase.line_insert_record(record_list)
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=str(record_list) + reply)
+            TextSendMessage(text=str(record_list))
         )
 
         return True
