@@ -104,13 +104,13 @@ def flow(event):
 
 
 def order_meal(event, userId):
-    profile_data = {
-        'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
-    profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
-    user_json = json.loads(profile.text)
-    today = datetime.datetime.now().date()
-    this_sat = today + datetime.timedelta(days=5 - datetime.datetime.now().weekday())
     if '週六追求訂便當' in event.message.text:
+        profile_data = {
+            'Authorization': 'Bearer mPWcLzfZ80c9sPnTZe8sCrQxBuXhVvd8UCmrYhPKNn6+4P+CS8en7tG4u4lt0lCxT6zHPs+fDSuDzx0bSeuqvcW8fA885ktKefHkoSXw4etD8rzA73M2AXRTKUORo9c6ImLaO86kjYUxbqgKmk90FgdB04t89/1O/w1cDnyilFU='}
+        profile = requests.get('https://api.line.me/v2/bot/profile/' + userId, headers=profile_data)
+        user_json = json.loads(profile.text)
+        today = datetime.datetime.now().date()
+        this_sat = today + datetime.timedelta(days=5 - datetime.datetime.now().weekday())
 
         line_bot_api.reply_message(
             event.reply_token,
@@ -140,9 +140,12 @@ def order_meal(event, userId):
 
 def participate(event, userId):
     if '週六追求簽到' in event.message.text:
+        text_list = event.message.text.split(' ')
+        record_list = [userId, text_list[1], text_list[2], text_list[3]]
+
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text + '資料匯入成功!')
+            TextSendMessage(text=str(record_list) + ' 資料匯入成功!')
         )
 
         return True
