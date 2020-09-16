@@ -9,47 +9,47 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSend
 from custom_models import PhoebeTalks, utils, PhoebeFlex, CallDatabase
 
 app = Flask(__name__)
-app.secret_key = '123456'
-
-# Day25: users 使用者清單
-users = {'Me': {'password': 'myself'}}
-
-# Day25: Flask-Login 初始化
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.session_protection = "strong"
-login_manager.login_view = 'login'
-login_manager.login_message = '請證明你並非來自黑暗草泥馬界'
-
-
-class User(UserMixin):
-    pass
-
-
-@login_manager.user_loader
-def user_loader(user_id):
-    if user_id not in users:
-        return
-
-    user = User()
-    user.id = user_id
-    return user
+# app.secret_key = '123456'
+#
+# # Day25: users 使用者清單
+# users = {'Me': {'password': 'myself'}}
+#
+# # Day25: Flask-Login 初始化
+# login_manager = LoginManager()
+# login_manager.init_app(app)
+# login_manager.session_protection = "strong"
+# login_manager.login_view = 'login'
+# login_manager.login_message = '請證明你並非來自黑暗草泥馬界'
+#
+#
+# class User(UserMixin):
+#     pass
 
 
-@login_manager.request_loader
-def request_loader(request):
-    user_id = request.form.get('user_id')
-    if user_id not in users:
-        return
-
-    user = User()
-    user.id = user_id
-
-    # DO NOT ever store passwords in plaintext and always compare password
-    # hashes using constant-time comparison!
-    user.is_authenticated = request.form['password'] == users[user_id]['password']
-
-    return user
+# @login_manager.user_loader
+# def user_loader(user_id):
+#     if user_id not in users:
+#         return
+#
+#     user = User()
+#     user.id = user_id
+#     return user
+#
+#
+# @login_manager.request_loader
+# def request_loader(request):
+#     user_id = request.form.get('user_id')
+#     if user_id not in users:
+#         return
+#
+#     user = User()
+#     user.id = user_id
+#
+#     # DO NOT ever store passwords in plaintext and always compare password
+#     # hashes using constant-time comparison!
+#     user.is_authenticated = request.form['password'] == users[user_id]['password']
+#
+#     return user
 
 
 # LINE 聊天機器人的基本資料
