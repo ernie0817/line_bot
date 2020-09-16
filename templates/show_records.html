@@ -4,7 +4,7 @@
 
 {% block main %}
 
-  <div class="container">
+  <div class="container" style="margin: 4em auto"">
     <div class="row">
     <div class="col">
       <h1><i class="fas fa-barcode"></i> 簽到紀錄</h1>
@@ -25,13 +25,17 @@
   {%- endmacro %}
 
   <!-- 宣告一些等等會用來創造欄位說明的變數 -->
-  {% set col_names = (("record_no", "alpaca_name", "training", "duration", "date"),) %}
+  {% set col_names = (("編號", "LINEID", "名稱", "簽到", "日期"),) %}
 
   <!-- 用巨集快速創造欄位名稱 -->
   {{ easy_row(col_names, "h2") }}
 
+  <hr>
+
   <!-- 將所有草泥馬的訓練紀錄列在下面 -->
   {{ easy_row(html_records, "p") }}
+
+  <hr>
 
   </div>
 
