@@ -27,27 +27,27 @@ line_bot_api = LineBotApi(
 
 
 # 請 LINE 幫我們存入資料
-def insert_record(event):
-    if '草泥馬訓練紀錄' in event.message.text:
-
-        try:
-            record_list = utils.prepare_record(event.message.text)
-            reply = CallDatabase.line_insert_record(record_list)
-
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=reply)
-            )
-
-        except:
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text='失敗了')
-            )
-
-        return True
-    else:
-        return False
+# def insert_record(event):
+#     if '草泥馬訓練紀錄' in event.message.text:
+#
+#         try:
+#             record_list = utils.prepare_record(event.message.text)
+#             reply = CallDatabase.line_insert_record(record_list)
+#
+#             line_bot_api.reply_message(
+#                 event.reply_token,
+#                 TextSendMessage(text=reply)
+#             )
+#
+#         except:
+#             line_bot_api.reply_message(
+#                 event.reply_token,
+#                 TextSendMessage(text='失敗了')
+#             )
+#
+#         return True
+#     else:
+#         return False
 
 
 # 請 pixabay 幫我們找圖
@@ -69,9 +69,16 @@ def img_search(event):
 
 
 def pretty_echo(event):
+    pretty_note = '♫♪♬'
+    pretty_text = ''
+
+    for i in event.message.text:
+        pretty_text += i
+        pretty_text += f" {random.choice(pretty_note)} "
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=str(event.message.text))
+        TextSendMessage(text=pretty_text)
     )
 
     return True
@@ -117,19 +124,22 @@ def order_meal(event, userId):
             TemplateSendMessage(alt_text='Buttons template',
                                 template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
                                     MessageTemplateAction(label='會參加且會留下用餐',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加且會留下用餐'),
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 會參加且會留下用餐'),
                                     MessageTemplateAction(label='會參加但不留下用餐',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 會參加但不留下用餐'),
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 會參加但不留下用餐'),
                                     MessageTemplateAction(label='因有事無法參加',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(this_sat) + ' 因有事無法參加')]))
+                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
+                                                              this_sat) + ' 因有事無法參加')]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
-    # elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
-    #     text_list = event.postback.data.split('/')
-    #     line_bot_api.reply_message(
-    #         event.reply_token,
-    #         TextSendMessage(text=str(text_list) + '已寫入資料庫')
-    #     )
+        # elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
+        #     text_list = event.postback.data.split('/')
+        #     line_bot_api.reply_message(
+        #         event.reply_token,
+        #         TextSendMessage(text=str(text_list) + '已寫入資料庫')
+        #     )
         # record_list = utils.prepare_record(event.postback.data)
 
         return True
@@ -140,21 +150,26 @@ def order_meal(event, userId):
 
 def participate(event, userId):
     if '週六追求簽到' in event.message.text:
-        text_list = event.message.text.split(' ')
-        if text_list[3] == '會參加且會留下用餐':
-            pa = 'A'
-        if text_list[3] == '會參加但不留下用餐':
-            pa = 'B'
-        if text_list[3] == '因有事無法參加':
-            pa = 'C'
-        record_list = [userId, text_list[1], pa, text_list[2]]
-        reply = CallDatabase.line_insert_record(record_list)
+        try:
+            text_list = event.message.text.split(' ')
+            if text_list[3] == '會參加且會留下用餐':
+                pa = 'A'
+            if text_list[3] == '會參加但不留下用餐':
+                pa = 'B'
+            if text_list[3] == '因有事無法參加':
+                pa = 'C'
+            record_list = [userId, text_list[1], pa, text_list[2]]
+            reply = CallDatabase.line_insert_record(record_list)
 
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=reply)
-        )
-
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text=reply)
+            )
+        except:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='資料匯入失敗!')
+            )
         return True
 
     else:

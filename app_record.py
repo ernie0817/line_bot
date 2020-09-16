@@ -194,8 +194,8 @@ def reply_text_message(event):
             reply = PhoebeTalks.participate(event, event.source.user_id)
 
         # 將資料存入表格中
-        if not reply:
-            reply = PhoebeTalks.insert_record(event)
+        # if not reply:
+        #     reply = PhoebeTalks.insert_record(event)
 
         # 發送 FlexMessage
         if not reply:
