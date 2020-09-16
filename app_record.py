@@ -90,9 +90,9 @@ def home():
 #     return render_template('login.html')
 
 
-# @app.route("/from_start")
-# def from_start():
-#     return render_template("from_start.html")
+@app.route("/from_start")
+def from_start():
+    return render_template("from_start.html")
 
 
 # @app.route("/show_records")
