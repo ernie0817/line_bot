@@ -131,7 +131,9 @@ def order_meal(event, userId):
                                                               this_sat) + ' 會參加但不留下用餐'),
                                     MessageTemplateAction(label='因有事無法參加',
                                                           text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 因有事無法參加')]))
+                                                              this_sat) + ' 因有事無法參加'),
+                                    MessageTemplateAction(label='查看簽到記錄',
+                                                          text='查看簽到記錄')]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
         # elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
@@ -172,5 +174,11 @@ def participate(event, userId):
             )
         return True
 
+    if '查看簽到記錄' in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='https://orderstudent.herokuapp.com/')
+        )
+        return True
     else:
         return False
