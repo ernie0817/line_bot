@@ -25,7 +25,7 @@
   {%- endmacro %}
 
   <!-- 宣告一些等等會用來創造欄位說明的變數 -->
-  {% set col_names = (("編號", "LINEID", "名稱", "簽到", "日期"),) %}
+  {% set col_names = (("record_no", "user_id", "user_name", "participate", "date"),) %}
 
   <!-- 用巨集快速創造欄位名稱 -->
   {{ easy_row(col_names, "h2") }}
