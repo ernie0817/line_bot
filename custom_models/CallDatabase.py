@@ -7,15 +7,32 @@ def line_insert_record(record_list):
 
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
+    query = f"""SELECT * FROM order_meal WHERE user_id = %s"""
+    cursor.execute(query, (record_list[0],))
+    data = []
+    while True:
+        temp = cursor.fetchone()
+        if temp:
+            data.append(temp)
+        else:
+            break
+
+    if not data:
+        table_columns = '(user_id, user_name, participate, date)'
+        postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s);"""
+        cursor.execute(postgres_insert_query, record_list)
+
+    else:
+        postgres_update_query = f"""UPDATE order_meal SET user_name = %s, participate = %s, date = %s WHERE user_id = %s"""
+        cursor.execute(postgres_update_query, (record_list[1], record_list[2], record_list[3], record_list[0]))
     #
     # # table_columns = '(alpaca_name, training, duration, date)'
     # # postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (%s,%s,%s,%s)"""
-    table_columns = '(user_id, user_name, participate, date)'
-    postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s)"""
-    #
-    cursor.execute(postgres_insert_query, record_list)
-    conn.commit()
 
+    # postgres_insert_query = f"""INSERT INTO order_meal {table_columns} VALUES (%s, %s, %s, %s)"""
+    #
+    # cursor.execute(postgres_insert_query, record_list)
+    conn.commit()
     message = '資料匯入成功!'
     # print(message)
 
