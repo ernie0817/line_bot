@@ -17,21 +17,23 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 sched = BlockingScheduler()
 
 
-# @sched.scheduled_job('cron', day_of_week=0-4, minute='*/25')
-# def scheduled_job():
-#     print('========== APScheduler CRON =========')
-#     print('This job runs every weekday */25 min.')
-#     print(f'{datetime.datetime.now().ctime()}')
-#     print('========== APScheduler CRON =========')
-#
-#     url = "https://orderstudent.herokuapp.com/"
-#     conn = urllib.request.urlopen(url)
-#
-#     for key, value in conn.getheaders():
-#         print(key, value)
+@sched.scheduled_job('cron', day_of_week=0-4, minute='*/5')
+def scheduled_job():
+    print('========== APScheduler CRON =========')
+    print('This job runs every weekday */25 min.')
+    print(f'{datetime.datetime.now().ctime()}')
+    print('========== APScheduler CRON =========')
+
+    url = "https://orderstudent.herokuapp.com/"
+    conn = urllib.request.urlopen(url)
+
+    for key, value in conn.getheaders():
+        print(key, value)
+
+    line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
 
 
-@sched.scheduled_job('cron', day_of_week=0, hour=15, minute=20)
+@sched.scheduled_job('cron', day_of_week=0, hour=15, minute=35)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
