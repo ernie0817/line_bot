@@ -33,14 +33,14 @@ sched = BlockingScheduler()
 #     line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
 
 
-@sched.scheduled_job('cron', day_of_week=0, hour=16, minute=16)
+@sched.scheduled_job('cron', day_of_week=0, hour=16, minute=20)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
     print('========== APScheduler CRON =========')
 
-    line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
-    # line_bot_api.broadcast(TextSendMessage(text="記得訂便當喔!"))
+    # line_bot_api.push_message("Ubef4ab85bdc358ebca5ef6969763f5b6", TextSendMessage(text="記得訂便當喔!"))
+    line_bot_api.broadcast(TextSendMessage(text="這週沒追求,記得不要訂便當喔!"))
 
 
 sched.start()
