@@ -124,14 +124,14 @@ def order_meal(event, userId):
             TemplateSendMessage(alt_text='Buttons template',
                                 template=ButtonsTemplate(title='週六追求簽到', text=str(this_sat), actions=[
                                     MessageTemplateAction(label='會參加且會留下用餐',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 會參加且會留下用餐'),
+                                                          text='週六追求簽到/' + str(user_json['displayName']) + '/' + str(
+                                                              this_sat) + '/會參加且會留下用餐'),
                                     MessageTemplateAction(label='會參加但不留下用餐',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 會參加但不留下用餐'),
+                                                          text='週六追求簽到/' + str(user_json['displayName']) + '/' + str(
+                                                              this_sat) + '/會參加但不留下用餐'),
                                     MessageTemplateAction(label='因有事無法參加',
-                                                          text='週六追求簽到 ' + str(user_json['displayName']) + ' ' + str(
-                                                              this_sat) + ' 因有事無法參加')]))
+                                                          text='週六追求簽到/' + str(user_json['displayName']) + '/' + str(
+                                                              this_sat) + '/因有事無法參加')]))
             # TextSendMessage(text=str(user_json['displayName']))
         )
         # elif isinstance(event, PostbackEvent):  # 如果有回傳值事件
@@ -151,7 +151,7 @@ def order_meal(event, userId):
 def participate(event, userId):
     if '週六追求簽到' in event.message.text:
         try:
-            text_list = event.message.text.split(' ')
+            text_list = event.message.text.split('/')
             if text_list[3] == '會參加且會留下用餐':
                 pa = 'A'
             if text_list[3] == '會參加但不留下用餐':

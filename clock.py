@@ -17,21 +17,21 @@ handler = WebhookHandler('ba597a8d56c7986d140690fb97151b8d')
 sched = BlockingScheduler()
 
 
-@sched.scheduled_job('cron', day_of_week=0-4, minute='*/25')
-def scheduled_job():
-    print('========== APScheduler CRON =========')
-    print('This job runs every weekday */25 min.')
-    print(f'{datetime.datetime.now().ctime()}')
-    print('========== APScheduler CRON =========')
+# @sched.scheduled_job('cron', day_of_week=0-4, minute='*/25')
+# def scheduled_job():
+#     print('========== APScheduler CRON =========')
+#     print('This job runs every weekday */25 min.')
+#     print(f'{datetime.datetime.now().ctime()}')
+#     print('========== APScheduler CRON =========')
+#
+#     url = "https://orderstudent.herokuapp.com/"
+#     conn = urllib.request.urlopen(url)
+#
+#     for key, value in conn.getheaders():
+#         print(key, value)
 
-    url = "https://orderstudent.herokuapp.com/"
-    conn = urllib.request.urlopen(url)
 
-    for key, value in conn.getheaders():
-        print(key, value)
-
-
-@sched.scheduled_job('cron', day_of_week=4, hour=17, minute=30)
+@sched.scheduled_job('cron', day_of_week=0, hour=15, minute=20)
 def scheduled_job():
     print('========== APScheduler CRON =========')
     print('This job is run every weekday at 6:30')
