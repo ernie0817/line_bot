@@ -6,7 +6,7 @@
 
   <div class="container" style="margin: 4em auto"">
     <div class="row">
-    <div class="col-xs-8">
+    <div class="col">
       <h1><i class="fas fa-barcode"></i> 簽到紀錄</h1>
       <p>A:會參加且會留下用餐 B:會參加但不留下用餐 C:因有事無法參加 </p>
     </div>
@@ -17,9 +17,9 @@
     {% for record in data %}
     <div class="row">
       {% for item in record %}
-      <div class="col-xs-8">
+      <div class="col">
       <{{ tag }}>{{ item }}</{{ tag }}>
-      </div>
+      auto</div>
       {% endfor %}
     </div>
     {% endfor %}
